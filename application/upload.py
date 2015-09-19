@@ -5,7 +5,7 @@ from flask import Flask, request, redirect, url_for, render_template
 from werkzeug import secure_filename
 from . import app
 
-UPLOAD_FOLDER = '/var/www/html/crowdcam/videofiles'
+UPLOAD_FOLDER = os.path.join(os.getcwd(),'videofiles')
 ALLOWED_EXTENSIONS = set(['mp4','mpeg4','H264'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -16,6 +16,7 @@ def allowed_file(filename):
 
 @app.route('/uploads', methods=['GET', 'POST'])
 def upload_file():
+    print(request)
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
