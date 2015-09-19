@@ -2,11 +2,13 @@ __author__ = 'acl3qb'
 
 import os
 from flask import Flask, request, redirect, url_for, render_template
-from werkzeug import secure_filename
-from . import app
+from flask.ext.sqlalchemy import SQLAlchemy
+from werkzeug.utils import secure_filename
+from datetime import datetime
+from . import app, db, models
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(),'videofiles')
-ALLOWED_EXTENSIONS = set(['mp4','mpeg4','H264'])
+ALLOWED_EXTENSIONS = set(['mp4','mpeg4','mpeg','H264'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -20,8 +22,17 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+            extension = (file.filename).rsplit('.', 1)[1]
+            video = models.Video(0,
+                                 datetime.utcnow(),
+                                 request.form['lat'],
+                                 request.form['lng'],
+                                 extension)
+            db.session.add(video)
+            db.session.commit()
+            # save by video id using the extension from earlier
+            filename = str(video.VideoID) + '.' + extension
+            #we can load it from wild cards for the hackathon
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            return redirect('/viewer/'+str(video.VideoID))
     return render_template('uploads.html')
