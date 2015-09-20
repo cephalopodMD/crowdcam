@@ -54,7 +54,7 @@ def event_json(eventid):
                 func.unix_timestamp(models.Video.Time) > (event.TimeStart-datetime(1970,1,1)).total_seconds(),
                 func.unix_timestamp(models.Video.Time) < (event.TimeEnd-datetime(1970,1,1)).total_seconds())\
         .order_by(models.Video.Time)
-    return jsonify({event.Name:event.dictionary(),
+    return jsonify({'event':event.dictionary(),
         'videos':[video.dictionary() for video in videos]})
 
 if __name__ == '__main__':

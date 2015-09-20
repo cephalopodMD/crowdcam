@@ -48,6 +48,7 @@ class Event(db.Model):
 
     def dictionary(self):
         return {
+            'name':self.Name,
             'start':self.TimeStart,
             'end':self.TimeEnd,
             'unixstart':(self.TimeStart-datetime(1970,1,1)).total_seconds(),
