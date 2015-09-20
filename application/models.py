@@ -45,5 +45,14 @@ class Event(db.Model):
     LngEnd = db.Column(db.Float)
     Name = db.Column(db.VARCHAR(32))
 
+    def dictionary(self):
+        return {
+            'start':self.TimeStart,
+            'end':self.TimeEnd,
+            'minlat':self.LatStart,
+            'maxlat':self.LatEnd,
+            'minlng':self.LngStart,
+            'maxlng':self.LngEnd
+        }
 if __name__ == '__main__':
     pass
