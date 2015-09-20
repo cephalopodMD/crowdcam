@@ -40,7 +40,6 @@ def event_viewer(eventid):
     else:
         return "no videos in this event"
 
-@app.after_request
 @app.route('/event/<eventid>.json')
 def event_json(eventid):
     event = models.Event.query\
