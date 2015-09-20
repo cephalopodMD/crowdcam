@@ -7,6 +7,13 @@ db = SQLAlchemy(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = (
         'mysql://crowdcam:tgosowhw@127.0.0.1:3307/crowdcam')
 
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', '*')
+  response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+  response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+  return response
+
 from . import upload, display, models
 
 @app.route('/', methods=['GET'])

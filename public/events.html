@@ -30,8 +30,10 @@
         <div class="row">
             <div class="col s12">
                 <video width="100%" height="auto" controls ng-wait>
+                    <!--
                     <source ng-src="{{apiRoot}}/uploads/{{currentvideo.id}}.{{currentvideo.extension}}" type="video/{{currentvideo.extension}}">
                     Your browser does not support the video tag.
+                    -->
                 </video>
             </div>
         </div>
@@ -40,8 +42,10 @@
                 <div class="card">
                     <div class="card-image">
                         <video width="100%" height="auto" controls ng-wait>
+                            <!--
                             <source ng-src="{{apiRoot}}/uploads/{{video.id}}.{{video.extension}}" type="video/{{video.extension}}">
                             Your browser does not support the video tag.
+                            -->
                         </video>
                         <span class="card-title">Video</span>
                     </div>
@@ -58,16 +62,13 @@
 
 <script>
 
-var app = angular.module('myApp', 'http', []);
+var app = angular.module('myApp', []);
 app.controller('myCtrl', function($scope, $http) {
-    Log('Hello world!')
+    console.log('Hello world!')
     $scope.apiRoot = "http://crowdcam.cloudapp.net:5000";
-    $scope.event={};
-    $scope.videos = [];
-    $scope.currentvideo = {};
     $scope.eventid = 8;
 
-    $http.get($scope.apiRoot + "/events/" + $scope.eventid)
+    $http.get("" + $scope.apiRoot + "/events/" + $scope.eventid)
     .success(function(response) {
                 $scope.event = response.event;
                 $scope.videos = response.videos;
