@@ -28,6 +28,7 @@ class Video(db.Model):
         return {
             'id':self.VideoID,
             'datetime':self.Time,
+            'unixtime':(self.time-datetime(1970,1,1)).total_seconds(),
             'lat':self.Lat,
             'lng':self.Lng,
             'extension':self.Extension
@@ -49,6 +50,8 @@ class Event(db.Model):
         return {
             'start':self.TimeStart,
             'end':self.TimeEnd,
+            'unixstart':(self.TimeStart-datetime(1970,1,1)).total_seconds(),
+            'unixend':(self.TimeStart-datetime(1970,1,1)).total_seconds(),
             'minlat':self.LatStart,
             'maxlat':self.LatEnd,
             'minlng':self.LngStart,
