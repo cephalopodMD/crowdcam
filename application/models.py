@@ -43,6 +43,7 @@ class Event(db.Model):
     LatEnd = db.Column(db.Float)
     LngStart = db.Column(db.Float)
     LngEnd = db.Column(db.Float)
+    Name = db.Column(db.VARCHAR(32))
 
 if __name__ == '__main__':
     pass
