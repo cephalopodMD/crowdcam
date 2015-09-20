@@ -68,7 +68,7 @@ app.controller('myCtrl', function($scope, $http) {
     $scope.apiRoot = "http://crowdcam.cloudapp.net:5000";
     $scope.eventid = 8;
 
-    $http.get("" + $scope.apiRoot + "/events/" + $scope.eventid)
+    $http.get("" + $scope.apiRoot + "/event/" + $scope.eventid + ".json")
     .success(function(response) {
                 $scope.event = response.event;
                 $scope.videos = response.videos;

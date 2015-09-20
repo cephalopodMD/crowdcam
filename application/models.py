@@ -28,7 +28,7 @@ class Video(db.Model):
         return {
             'id':self.VideoID,
             'datetime':self.Time,
-            'unixtime':(self.time-datetime(1970,1,1)).total_seconds(),
+            'unixtime':(self.Time-datetime(1970,1,1)).total_seconds(),
             'lat':self.Lat,
             'lng':self.Lng,
             'extension':self.Extension
