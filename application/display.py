@@ -5,6 +5,15 @@ from sqlalchemy.sql import func
 from datetime import datetime
 from . import app, db, models
 
+def cors(func):
+    def inner(*args, **kwargs):
+        response = func(*args, **kwargs)
+        response.headers.add('Access-Control-Allow-Origin', '*')
+        response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
+        response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+        return response
+    return inner
+
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
@@ -39,7 +48,7 @@ def event_viewer(eventid):
                                name=event.Name)
     else:
         return "no videos in this event"
-
+@cors
 @app.route('/event/<eventid>.json')
 def event_json(eventid):
     event = models.Event.query\
