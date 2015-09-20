@@ -46,9 +46,6 @@ def event_json(eventid):
     event = models.Event.query\
         .filter(models.Event.EventID == eventid)\
         .first()
-    videos = models.Video.query
-    for video in videos:
-        print(video.Lat, video.Lng, (video.Time-datetime(1970,1,1)).total_seconds())
     videos = models.Video.query\
         .filter(models.Video.Lat > float(event.LatStart),
                 models.Video.Lat < float(event.LatEnd),
