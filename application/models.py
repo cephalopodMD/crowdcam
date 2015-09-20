@@ -24,5 +24,25 @@ class Video(db.Model):
         self.Lng = Lng
         self.Extension = Extension
 
+    def dictionary(self):
+        return {
+            'id':self.VideoID,
+            'datetime':self.Time,
+            'lat':self.Lat,
+            'lng':self.Lng,
+            'extension':self.Extension
+        }
+
+class Event(db.Model):
+
+    __tablename__ = 'events'
+    EventID = db.Column(db.Integer, primary_key=True)
+    TimeStart = db.Column(db.DateTime)
+    TimeEnd = db.Column(db.DateTime)
+    LatStart = db.Column(db.Float)
+    LatEnd = db.Column(db.Float)
+    LngStart = db.Column(db.Float)
+    LngEnd = db.Column(db.Float)
+
 if __name__ == '__main__':
     pass

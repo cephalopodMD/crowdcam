@@ -1,6 +1,8 @@
 __author__ = 'acl3qb'
 
 from flask import send_from_directory, render_template
+from sqlalchemy.sql import func
+from datetime import datetime
 from . import app, db, models
 
 @app.route('/uploads/<filename>')
@@ -14,14 +16,31 @@ def viewer(videoid):
             .filter(models.Video.VideoID == videoid)\
             .first()
     if video:
-        return render_template('viewer.html',
-                               videoid=str(video.VideoID),
-                               extension=video.Extension,
-                               datetime=str(video.Time),
-                               lat=str(video.Lat),
-                               lng=str(video.Lng))
+        return render_template('viewer.html',videos=[video.dictionary()])
     else:
         return "error, no such video id"
+
+@app.route('/event/<eventid>')
+def event_viewer(eventid):
+    event = models.Event.query\
+        .filter(models.Event.EventID == eventid)\
+        .first()
+    videos = models.Video.query
+    for video in videos:
+        print(video.Lat, video.Lng, (video.Time-datetime(1970,1,1)).total_seconds())
+    videos = models.Video.query\
+        .filter(models.Video.Lat > float(event.LatStart),
+                models.Video.Lat < float(event.LatEnd),
+                models.Video.Lng > float(event.LngStart),
+                models.Video.Lng < float(event.LngEnd),
+                func.unix_timestamp(models.Video.Time) > (event.TimeStart-datetime(1970,1,1)).total_seconds(),
+                func.unix_timestamp(models.Video.Time) < (event.TimeEnd-datetime(1970,1,1)).total_seconds())\
+        .order_by(models.Video.Time)
+    if videos.count() > 0:
+        return render_template('viewer.html',
+                               videos=[video.dictionary() for video in videos])
+    else:
+        return "no videos in this event"
 
 if __name__ == '__main__':
     pass
