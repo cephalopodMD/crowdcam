@@ -28,9 +28,8 @@
     <nav>
         <div class="nav-wrapper">
             <div class="container">
-                <a href="#" class="brand-logo">CrowdCam</a>
+                <a href="index.html" class="brand-logo">CrowdCam</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="events.html">Events</a></li>
                     <li><a href="sass.html">About</a></li>
                 </ul>
             </div>
@@ -41,22 +40,24 @@
         <h3 style="margins:autos">{{event.name}}</h3>
         <div class="row">
             <div class="col s12">
-                <video width="100%" height="auto" controls ng-wait>
-                    <!--<source ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[videoindex].id+'.'+videos[videoindex].extension)}}" type="video/{{videos[videoindex].extension}}">-->
-                    <source src="http://crowdcam.cloudapp.net:5000/uploads/4.mp4" type="video/mp4">
+                <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[0].id+'.'+videos[0].extension)}}">
                     Your browser does not support the video tag.
                 </video>
             </div>
         </div>
+        <form action="#">
+            <p class="range-field">
+                <input type="range" id="test5" min="0" max="100" />
+            </p>
+        </form>
         <div class="row">
             <div class="col s6 m3" ng-repeat="video in videos">
                 <div class="card">
                     <div class="card-image">
-                        <video width="100%" height="auto" controls ng-wait>
-                            <source ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.'+video.extension)}}" type="video/{{video.extension}}">
+                        <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.'+video.extension)}}">
                             Your browser does not support the video tag.
                         </video>
-                        <span class="card-title">Video</span>
+                        <span class="card-title"></span>
                     </div>
                     <div class="card-content">
                         <p>{{video.lat}}, {{video.lng}} at {{video.datetime}}</p>

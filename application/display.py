@@ -1,6 +1,6 @@
 __author__ = 'acl3qb'
 
-from flask import send_from_directory, render_template, jsonify, make_response
+from flask import send_from_directory, render_template, jsonify
 from sqlalchemy.sql import func
 from datetime import datetime
 from . import app, db, models
