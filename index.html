@@ -54,7 +54,7 @@
             <div class="col s6" ng-repeat="video in videos.slice(0,2)">
                 <div class="card">
                     <div class="card-image">
-                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.jpeg')}}">
+                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/thumbnails/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
                     <div class="card-content">
@@ -65,7 +65,7 @@
             <div class="col s6 m3" ng-repeat="video in videos.slice(2)">
                 <div class="card">
                     <div class="card-image">
-                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.jpeg')}}">
+                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/thumbnails/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
                     <div class="card-content">
