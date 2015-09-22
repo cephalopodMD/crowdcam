@@ -65,7 +65,7 @@
             </div>
             <div class="col s6 m3" ng-repeat="video in videos.slice(2)">
                 <div class="card">
-                    <div class="card-image" ng-click="setVideo($index)">
+                    <div class="card-image" ng-click="setVideo($index+2)">
                         <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/thumbnails/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
