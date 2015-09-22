@@ -37,7 +37,9 @@
     </nav>
 
     <div class="container">
-        <span><h3>{{event.name}}</h3> {{event.start}} to {{event.end}}</span>
+        <span style="margin:auto">
+            <h3>{{event.name}}</h3>
+        </span>
         <div class="row">
             <div class="col s12">
                 <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[videoindex].id+'.'+videos[videoindex].extension)}}">
