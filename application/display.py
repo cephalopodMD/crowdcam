@@ -19,6 +19,11 @@ def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'],
                                filename)
 
+@app.route('/thumbnails/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['THUMBNAIL_FOLDER'],
+                               filename)
+
 @app.route('/viewer/<videoid>')
 def viewer(videoid):
     video = models.Video.query\

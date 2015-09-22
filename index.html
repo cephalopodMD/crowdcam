@@ -40,7 +40,7 @@
         <h3 style="margins:autos">{{event.name}}</h3>
         <div class="row">
             <div class="col s12">
-                <video width="100%" height="auto" controls ng-src="{{trustSrc('http://crowdcam.cloudapp.net/uploads/'+videos[0].id+'.'+videos[0].extension)}}">
+                <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[0].id+'.'+videos[0].extension)}}">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -51,12 +51,21 @@
             </p>
         </form>
         <div class="row">
-            <div class="col s6 m3" ng-repeat="video in videos">
+            <div class="col s6" ng-repeat="video in videos.slice(0,2)">
                 <div class="card">
                     <div class="card-image">
-                        <video width="100%" height="auto" controls ng-src="{{trustSrc('http://crowdcam.cloudapp.net/uploads/'+video.id+'.'+video.extension)}}">
-                            Your browser does not support the video tag.
-                        </video>
+                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.jpeg')}}">
+                        <span class="card-title"></span>
+                    </div>
+                    <div class="card-content">
+                        <p>{{video.lat}}, {{video.lng}} at {{video.datetime}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s6 m3" ng-repeat="video in videos.slice(2)">
+                <div class="card">
+                    <div class="card-image">
+                        <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/uploads/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
                     <div class="card-content">
