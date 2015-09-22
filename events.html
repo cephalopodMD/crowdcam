@@ -40,7 +40,7 @@
         <h3 style="margins:autos">{{event.name}}</h3>
         <div class="row">
             <div class="col s12">
-                <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[0].id+'.'+videos[0].extension)}}">
+                <video width="100%" height="auto" controls ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[videoindex].id+'.'+videos[videoindex].extension)}}">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col s6" ng-repeat="video in videos.slice(0,2)">
                 <div class="card">
-                    <div class="card-image">
+                    <div class="card-image" ng-click="setVideo($index)">
                         <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/thumbnails/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="col s6 m3" ng-repeat="video in videos.slice(2)">
                 <div class="card">
-                    <div class="card-image">
+                    <div class="card-image" ng-click="setVideo($index)">
                         <img width="100%" height="auto" ng-src="{{trustSrc(apiRoot+'/thumbnails/'+video.id+'.jpeg')}}">
                         <span class="card-title"></span>
                     </div>
@@ -117,9 +117,15 @@ app.controller('myCtrl', function($scope, $http, $sce) {
                 $scope.videos = response.videos;
             });
 
-  $scope.trustSrc = function(src) {
-    return $sce.trustAsResourceUrl(src);
-  }
+    $scope.trustSrc = function(src) {
+        return $sce.trustAsResourceUrl(src);
+    }
+
+    $scope.setVideo = function(index) {
+        console.log(index)
+        $scope.videoindex = index;
+        console.log($scope.videoindex)
+    }
 });
 
 </script>
