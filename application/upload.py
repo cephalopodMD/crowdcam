@@ -7,10 +7,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from . import app, db, models
 
-UPLOAD_FOLDER = os.path.join(os.getcwd(),'videofiles')
 ALLOWED_EXTENSIONS = set(['mp4','mpeg4','mpeg','H264'])
-
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -32,7 +29,13 @@ def upload_file():
             db.session.commit()
             # save by video id using the extension from earlier
             filename = str(video.VideoID) + '.' + extension
-            #we can load it from wild cards for the hackathon
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+            # we can load it from wild cards for the hackathon
+            file.save(os.path.join(app.config['VIDEO_FOLDER'],filename))
+            # thumbnails
+            os.popen('avconv -i ' +
+                     os.path.join(app.config['VIDEO_FOLDER'], filename) +
+                     ' -ss 00:00:00 -vframes 1 thumbnails/' +
+                     os.path.join(app.config['THUMBNAIL_FOLDER'], video.VideoID) +
+                     '.jpeg')
             return redirect('/viewer/'+str(video.VideoID))
     return render_template('uploads.html')
