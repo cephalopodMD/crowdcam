@@ -16,7 +16,7 @@ def cors(func):
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],
+    return send_from_directory(app.config['VIDEO_FOLDER'],
                                filename)
 
 @app.route('/thumbnails/<filename>')
