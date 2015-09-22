@@ -109,7 +109,7 @@ var app = angular.module('myApp', ['ngSanitize']);
 app.controller('myCtrl', function($scope, $http, $sce) {
     console.log('Hello world!')
     $scope.apiRoot = "http://crowdcam.cloudapp.net:5000";
-    $scope.eventid = 9;
+    $scope.eventid = 10;
     $scope.videoindex = 0;
 
     $http.get("" + $scope.apiRoot + "/event/" + $scope.eventid + ".json")
