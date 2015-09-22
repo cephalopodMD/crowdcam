@@ -20,7 +20,7 @@ def uploaded_file(filename):
                                filename)
 
 @app.route('/thumbnails/<filename>')
-def uploaded_file(filename):
+def thumbnail(filename):
     return send_from_directory(app.config['THUMBNAIL_FOLDER'],
                                filename)
 
