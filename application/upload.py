@@ -32,10 +32,12 @@ def upload_file():
             # we can load it from wild cards for the hackathon
             file.save(os.path.join(app.config['VIDEO_FOLDER'],filename))
             # thumbnails
-            os.popen('avconv -i ' +
-                     os.path.join(app.config['VIDEO_FOLDER'], filename) +
-                     ' -ss 00:00:00 -vframes 1 ' +
-                     os.path.join(app.config['THUMBNAIL_FOLDER'], str(video.VideoID)) +
-                     '.jpeg')
+            command = 'avconv -i ' +\
+                     os.path.join(app.config['VIDEO_FOLDER'], filename) +\
+                     ' -ss 00:00:00 -vframes 1 ' +\
+                     os.path.join(app.config['THUMBNAIL_FOLDER'], str(video.VideoID)) +\
+                     '.jpeg'
+            print(command)
+            os.popen(command)
             return redirect('/viewer/'+str(video.VideoID))
     return render_template('uploads.html')
