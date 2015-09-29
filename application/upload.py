@@ -35,7 +35,7 @@ def upload_file():
             os.popen('avconv -i ' +
                      os.path.join(app.config['VIDEO_FOLDER'], filename) +
                      ' -ss 00:00:00 -vframes 1 thumbnails/' +
-                     os.path.join(app.config['THUMBNAIL_FOLDER'], video.VideoID) +
+                     os.path.join(app.config['THUMBNAIL_FOLDER'], str(video.VideoID)) +
                      '.jpeg')
             return redirect('/viewer/'+str(video.VideoID))
     return render_template('uploads.html')
