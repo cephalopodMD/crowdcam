@@ -30,16 +30,16 @@
             <div class="container">
                 <a href="index.html" class="brand-logo">CrowdCam</a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="events.html">HackMIT</a></li>
-                    <li><a href="presdemo.html">Pres Demo</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="sass.html">About</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <h3 style="margins:autos">{{event.name}}</h3>
+        <span style="margin:auto">
+            <h3>{{event.name}}</h3>
+        </span>
         <div class="row">
             <div class="col s12">
                 <video width="100%" height="auto" controls ng-wait ng-src="{{trustSrc(apiRoot+'/uploads/'+videos[videoindex].id+'.'+videos[videoindex].extension)}}">
@@ -110,7 +110,7 @@ var app = angular.module('myApp', ['ngSanitize']);
 app.controller('myCtrl', function($scope, $http, $sce) {
     console.log('Hello world!')
     $scope.apiRoot = "http://crowdcam.cloudapp.net:5000";
-    $scope.eventid = 10;
+    $scope.eventid = 12;
     $scope.videoindex = 0;
 
     $http.get("" + $scope.apiRoot + "/event/" + $scope.eventid + ".json")
